@@ -43,8 +43,22 @@ d3.json(airportData).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
 L.geoJSON(data).addTo(map);
+L.geoJSON(data, {
+  // We turn each feature into a marker on the map.
+  pointToLayer: function(feature, latlng) {
+    console.log(feature);
+    return L.marker(latlng).bindPopup("<h2>" + "Airport code: " + feature.properties.faa + "<hr size=1 width=100% color=black>" + "Airport name: " + feature.properties.name + "</h2>");
+  }
+
+}).addTo(map);
 });
 
+// // Grabbing our GeoJSON data.
+// L.geoJSON(sanFranAirport, {
+//     // We turn each feature into a marker on the map.
+//     pointToLayer: function(feature, latlng) {
+//       console.log(feature);
+//       return L.marker(latlng).bindPopup("<h2>" + feature.properties.name + " " + feature.properties.city + ", " + feature.properties.state + "</h2>");
 
 // // Add GeoJSON data.
 // let sanFranAirport =
@@ -67,8 +81,8 @@ L.geoJSON(data).addTo(map);
 //             "coordinates":[-122.375,37.61899948120117]}}
 // ]};
 
-// // // Grabbing our GeoJSON data.
-// // L.geoJSON(sanFranAirport).addTo(map);
+// Grabbing our GeoJSON data.
+// L.geoJSON(sanFranAirport).addTo(map);
 
 // // Grabbing our GeoJSON data.
 // L.geoJSON(sanFranAirport, {
@@ -98,7 +112,7 @@ L.geoJSON(data).addTo(map);
 
 //   }).addTo(map);
 
-//   // Grabbing our GeoJSON data.
+// Grabbing our GeoJSON data.
 // L.geoJSON(sanFranAirport, {
 //     // We turn each feature into a marker on the map.
 //     pointToLayer: function(feature, latlng) {
